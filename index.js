@@ -18,7 +18,9 @@ const port = process.env.PORT || 5000;
 
 // middleware 
 
-app.use(cors());
+app.use(cors(
+{  origin: ['https://bistro-boss-c79c8.web.app', 'http://localhost:5173']}
+));
 app.use(express.json());
 
 
@@ -223,7 +225,7 @@ async function run() {
 
     // user related apis
 
-    app.get('/users', verifyToken,verifyAdmin, async(req,res)=>{
+    app.get('/users',verifyToken,verifyAdmin,async(req,res)=>{
      
       const result = await userCollection.find().toArray();
       res.send(result);
